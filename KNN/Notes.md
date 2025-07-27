@@ -125,76 +125,76 @@ _Threads 4_
 
 **Notes**
 
-1. Calculation time increases with increasing _features_ and _no of rows_.
-    With 10,000 rows, 5 features,
-        Model accuracy score 0.97
-        Time taken 0.34s
-        Sklearn accuracy score 0.97
-        Time taken 0.1s
-    With 10,000 rows, 10 features,
-        Model accuracy score 0.97
-        Time taken 0.38s
-        Sklearn accuracy score 0.97
-        Time taken 0.21s
-    With 20,000 rows, 5 features,
-        Model accuracy score 0.99
-        Time taken 1.12s
-        Sklearn accuracy score 0.99
-        Time taken 0.2s
-    With 30,000 rows, 10 features,
-        Model accuracy score 1.0
-        Time taken 2.96s
-        Sklearn accuracy score 1.0
+1. Calculation time increases with increasing _features_ and _no of rows_.<br/>
+    With 10,000 rows, 5 features,<br/>
+        Model accuracy score 0.97<br/>
+        Time taken 0.34s<br/>
+        Sklearn accuracy score 0.97<br/>
+        Time taken 0.1s<br/>
+    With 10,000 rows, 10 features,<br/>
+        Model accuracy score 0.97<br/>
+        Time taken 0.38s<br/>
+        Sklearn accuracy score 0.97<br/>
+        Time taken 0.21s<br/>
+    With 20,000 rows, 5 features,<br/>
+        Model accuracy score 0.99<br/>
+        Time taken 1.12s<br/>
+        Sklearn accuracy score 0.99<br/>
+        Time taken 0.2s<br/>
+    With 30,000 rows, 10 features,<br/>
+        Model accuracy score 1.0<br/>
+        Time taken 2.96s<br/>
+        Sklearn accuracy score 1.0<br/>
         Time taken 0.95s
 
-2. In mnist, row 10,000
-    Model accuracy score 0.93
-    Time taken _27.73s_
-    Sklearn accuracy score 0.93
-    Time taken 0.89s
+2. In mnist, row 10,000<br/>
+    Model accuracy score 0.93<br/>
+    Time taken _27.73s_<br/>
+    Sklearn accuracy score 0.93<br/>
+    Time taken 0.89s<br/>
 
 3. For mnist, best accuracy can be found with n_neighbours = 3
 
-4. For KNearestNeighbour class, distance metrics - "euclidean", "minkowski", "cityblock"
+4. For KNearestNeighbour class, distance metrics - "euclidean", "minkowski", "cityblock"<br/>
     Default is "cityblock" (Manhattan distance)
 
 
 
 **Time**
 
-With 40,000 rows, 10 features, (Without threading)
-    Model took 4.45s
-    Sklearn 1.56s
+With 40,000 rows, 10 features, (Without threading)<br/>
+    Model took 4.45s<br/>
+    Sklearn 1.56s<br/>
 
-With 40,000 rows, 10 features, (With threading, 4 threads) **v3**
-    Model took 2.75s
-    Sklearn 1.56s
+With 40,000 rows, 10 features, (With threading, 4 threads) **v3**<br/>
+    Model took 2.75s<br/>
+    Sklearn 1.56s<br/>
 
-With 30,000 rows (21,000 train set), MNIST **v4**
-    Time taken for dist calcu 55.48s
-    Time taken for y_pred 0.84s
-    Model accuracy score 0.9488
-    Time taken 56.33s
+With 30,000 rows (21,000 train set), MNIST **v4**<br/>
+    Time taken for dist calcu 55.48s<br/>
+    Time taken for y_pred 0.84s<br/>
+    Model accuracy score 0.9488<br/>
+    Time taken 56.33s<br/>
 
 
 
 **v3**
 
-In mnist, row 10,000 (7000 train set), all features(782)
-    Time taken for dist calcu 23.78s (1500, 7000)   **Distance calculations are taking most time**
-    Time taken for y_pred 0.19s
-    Time taken by model 23.97s
+In mnist, row 10,000 (7000 train set), all features(782)<br/>
+    Time taken for dist calcu 23.78s (1500, 7000)   **Distance calculations are taking most time**<br/>
+    Time taken for y_pred 0.19s<br/>
+    Time taken by model 23.97s<br/>
 
-    but sklearn took only 0.93s
+    but sklearn took only 0.93s<br/>
 
 
 **v4**
 
-cores - 5   _Seems best for mnist_
-Time taken for dist calcu 8.16s     **Reduced due to multiprocessing**
-Time taken for y_pred 0.18s
-Model accuracy score 0.92
-Time taken by model 8.34s
+cores - 5   _Seems best for mnist_<br/>
+Time taken for dist calcu 8.16s     **Reduced due to multiprocessing**<br/>
+Time taken for y_pred 0.18s<br/>
+Model accuracy score 0.92<br/>
+Time taken by model 8.34s<br/>
 
-Sklearn accuracy score 0.93
+Sklearn accuracy score 0.93<br/>
 Sklearn Time taken 0.94s
