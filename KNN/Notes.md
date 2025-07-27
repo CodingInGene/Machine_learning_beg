@@ -1,9 +1,13 @@
 # K Nearest Neighbour
 
 **Variables**
+
 self.n_jobs - for multiprocessing in distance calculations (cdist)
 
+
 **cdist -**
+
+```
 x=[[xp1],[xp2],[xp3]]   _Known train x points_
 y=[[p1],[p2]]   _New points(test)_
 
@@ -12,9 +16,12 @@ Output -
     [p1 xp1     p1 xp2      p1 xp3]     _Distances with p1 and xtrain points_
     [p2 xp1     p2 xp2      p2 xp3]     _Distances with p2 and xtrain points_
 ]
+```
+
 
 **Program**
-<span style='color: green;'>
+
+```
     def getNargmin(d,n):
         comb = zip(np.arange(len(d)),d)
         min_values = np.array(sorted(comb, key=lambda t:t[1]))[:n]  #Sorted returns list of tuples, np.array makes it list of lists
@@ -30,7 +37,7 @@ Output -
             majority = values[np.argmax(count)]    #Get which class repeats most in neighbour
             self.y_pred.append(majority)
         self.y_pred = np.array(self.y_pred)
-</span>
+```
 
 
 **v1**
@@ -57,14 +64,14 @@ Output -
 
 **v2, vectorization**
 
-<span style='color: green;'>
+```
     def predict(self,xtest):
         min_indices = np.argpartition(dist, self.k, axis=1)[:, :self.k]
         
         neighbor_labels = self.ytrain[min_indices]  # Get labels of nearest neighbors
         
         self.y_pred = mode(neighbor_labels, axis=1, keepdims=False).mode    # Vectorized majority vote
-</span>
+```
 
 **v3, Multithreading in nearest neighbors**
 _Threads 4_
@@ -77,7 +84,7 @@ _Threads 4_
 
         return np.array(y_pred)
 
-    KNN class, predict method</u>
+    KNN class, predict method
     '''Threading for y_pred'''
     '''With threading'''
     div = np.split(dist,4)
@@ -100,23 +107,24 @@ _Threads 4_
 
 **v4, Multi-core processing in distance calculation**
 
-<span style='color: green;'>
+```
     def mprocessDist(xtest,xtrain,distance_metric="cityblock"):
         dist = cdist(xtest,xtrain,metric=distance_metric)
         return np.array(dist)
 
-<u> Predict method</u>
+    Predict method
     with ProcessPoolExecutor(max_workers=self.n_jobs) as executor:
         xtest_div = np.split(xtest, self.n_jobs)
         xtrain_div = np.split(self.xtrain, self.n_jobs)
         results = executor.map(mprocessDist, np.split(np.tile(xtest,(self.n_jobs,1)), self.n_jobs), xtrain_div)     #results is a generator iterable
 
     dist = np.hstack(list(results))   #converting generator object to list
-</span>
+```
 
 
 
 **Notes**
+
 1. Calculation time increases with increasing _features_ and _no of rows_.
     With 10,000 rows, 5 features,
         Model accuracy score 0.97
@@ -151,7 +159,9 @@ _Threads 4_
     Default is "cityblock" (Manhattan distance)
 
 
+
 **Time**
+
 With 40,000 rows, 10 features, (Without threading)
     Model took 4.45s
     Sklearn 1.56s
@@ -167,7 +177,9 @@ With 30,000 rows (21,000 train set), MNIST **v4**
     Time taken 56.33s
 
 
+
 **v3**
+
 In mnist, row 10,000 (7000 train set), all features(782)
     Time taken for dist calcu 23.78s (1500, 7000)   **Distance calculations are taking most time**
     Time taken for y_pred 0.19s
@@ -175,7 +187,9 @@ In mnist, row 10,000 (7000 train set), all features(782)
 
     but sklearn took only 0.93s
 
+
 **v4**
+
 cores - 5   _Seems best for mnist_
 Time taken for dist calcu 8.16s     **Reduced due to multiprocessing**
 Time taken for y_pred 0.18s
