@@ -70,7 +70,7 @@ def currentweatherdetails(city):    #Returns list of weather data and dict of lo
         "gust_kph": 26
     }
     # Api - http://api.weatherapi.com/v1/current.json?key={{apikey}}&q={{city}}&aqi=no
-    api_key = "c1926255a75c40e799564438250507"
+    api_key = "xx..xxxx"
     api_url = f"http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}&aqi=no"
     
     response = requests.get(api_url)
