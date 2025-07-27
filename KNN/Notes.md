@@ -69,7 +69,7 @@ Output -
 **v3, Multithreading in nearest neighbors**
 _Threads 4_
 
-<span style='color: green;'>
+```
     def threadPred(dist,k,ytrain):
         min_indices = np.argpartition(dist, k, axis=1)[:, :k]     #Nearest neighbors upto k
         neighbor_labels = ytrain[min_indices]  # Get labels of nearest neighbors
@@ -77,7 +77,7 @@ _Threads 4_
 
         return np.array(y_pred)
 
-<u> KNN class, predict method</u>
+    KNN class, predict method</u>
     '''Threading for y_pred'''
     '''With threading'''
     div = np.split(dist,4)
@@ -95,7 +95,7 @@ _Threads 4_
     temp4 = t4.join()
 
     self.y_pred = np.concatenate((temp1,temp2,temp3,temp4), axis=0)
-</span>
+```
 
 
 **v4, Multi-core processing in distance calculation**
